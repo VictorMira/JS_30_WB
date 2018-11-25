@@ -96,6 +96,35 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+  let lastChecked;
+
+
+function handleCheck(e){
+  //Ver si tenemos presionada la tecla SHIFT
+  //Y si estamos marcando un check y no desmarcando
+  let inBetween = false;
+  if(e.shiftKey && this.checked){
+    //vamos a hacer lo que le pedimos, marcar otras celdas
+    checkboxes.forEach(checkbox => {
+      console.log(checkbox);
+      if(checkbox === this || checkbox === lastChecked){
+        inBetween = !inBetween;
+        console.log("entre estos vale inBetween")
+      }
+
+      if(inBetween) {
+        checkbox.checked = true;
+      }
+    })
+  }
+
+  lastChecked = this;
+}
+
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+
 </script>
 </body>
 </html>
